@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Login.User_Info">
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:navigationIcon="@drawable/arrow_back"
+        app:title="Details"
+        android:id="@+id/toolbar"
+        android:layout_marginBottom="30dp"
+        >
+    </androidx.appcompat.widget.Toolbar>
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/imgview"
+        android:src="@color/colorPrimaryDark"
+        android:layout_below="@id/toolbar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        >
+    </ImageView>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrvw"
+        android:layout_below="@+id/imgview"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/firstname"
+
+                android:text="FirstName"
+                android:layout_marginHorizontal="40dp"
+                ></TextView>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/firstname"
+                android:id="@+id/edfirstname"
+                android:inputType="text"
+                android:layout_marginBottom="20dp"
+                android:layout_marginHorizontal="30dp">
+
+            </EditText>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/lastname"
+                android:layout_below="@+id/edfirstname"
+                android:text="LastName"
+                android:layout_marginHorizontal="40dp"
+                ></TextView>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lastname"
+                android:id="@+id/edlastname"
+                android:inputType="text"
+                android:layout_marginBottom="20dp"
+                android:layout_marginHorizontal="30dp">
+            </EditText>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/phoneno"
+                android:layout_below="@+id/edlastname"
+                android:text="Phone Number"
+                android:layout_marginHorizontal="40dp"
+                ></TextView>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/phoneno"
+                android:id="@+id/edphoneno"
+                android:layout_marginBottom="20dp"
+                android:inputType="phone"
+                android:layout_marginHorizontal="30dp">
+            </EditText>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/address"
+                android:layout_below="@+id/edphoneno"
+                android:text="Address"
+                android:layout_marginHorizontal="40dp"
+                ></TextView>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/address"
+                android:id="@+id/edaddress"
+                android:inputType="textPostalAddress"
+                android:layout_marginBottom="20dp"
+                android:layout_marginHorizontal="30dp">
+            </EditText>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/bio"
+                android:layout_below="@+id/edaddress"
+                android:text="Bio"
+                android:layout_marginHorizontal="40dp"
+                ></TextView>
+            <EditText
+                android:id ="@+id/edbio"
+                android:layout_below="@+id/bio"
+                android:layout_width ="match_parent"
+                android:layout_height ="wrap_content"
+                android:inputType="textCapSentences|textMultiLine"
+                android:maxLines ="5"
+                android:maxLength ="2000"
+                android:scrollHorizontally="false"
+                android:layout_marginHorizontal="30dp"/>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+    <Button
+        android:layout_width="100sp"
+        android:layout_height="wrap_content"
+        android:id="@+id/save"
+        android:text="Save"
+        android:layout_marginRight="30dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/scrvw"
+        android:background="#14000000"
+        android:layout_marginBottom="20dp"
+
+        ></Button>
+
+
+
+
+</RelativeLayout>

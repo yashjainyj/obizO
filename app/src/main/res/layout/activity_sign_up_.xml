@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Login.SignUp_Activity">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        app:navigationIcon="@drawable/arrow_back"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        app:title="SIGN UP"
+        app:titleTextColor="#464444">
+    </androidx.appcompat.widget.Toolbar>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/edcnfrmpass"
+                android:layout_marginHorizontal="40dp"
+                android:layout_marginTop="40dp"
+                android:id="@+id/register"
+                android:background="#03000000"
+                android:text="Register"></Button>
+
+            <EditText
+                android:id="@+id/eduser"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/username"
+                android:layout_marginHorizontal="30dp"></EditText>
+
+            <EditText
+                android:id="@+id/edemail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/emailid"
+                android:layout_marginHorizontal="30dp"
+                android:inputType="textEmailAddress"></EditText>
+
+            <EditText
+                android:id="@+id/edpassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/password"
+                android:layout_marginHorizontal="30dp"
+                android:inputType="textPassword"></EditText>
+
+            <EditText
+                android:id="@+id/edcnfrmpass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Cnfrmpass"
+                android:layout_marginHorizontal="30dp"
+                android:inputType="textPassword"></EditText>
+
+            <TextView
+                android:id="@+id/username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="40dp"
+                android:layout_marginTop="70dp"
+                android:text="UserName"
+                android:textColor="#000000"></TextView>
+
+            <TextView
+                android:id="@+id/emailid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/eduser"
+                android:layout_marginHorizontal="40dp"
+                android:layout_marginTop="10dp"
+                android:text="Email Id"
+                android:textColor="#000000"></TextView>
+
+            <TextView
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/edemail"
+                android:layout_marginHorizontal="40dp"
+                android:layout_marginTop="10dp"
+                android:text="Password"
+                android:textColor="#000000"></TextView>
+
+            <TextView
+                android:id="@+id/Cnfrmpass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/edpassword"
+                android:layout_marginHorizontal="40dp"
+                android:layout_marginTop="10dp"
+                android:text="Confirm Password"
+                android:textColor="#000000"></TextView>
+
+            <TextView
+                android:id="@+id/para"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/register"
+                android:layout_marginTop="90dp"
+                android:layout_marginLeft="90dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="20dp"
+                android:text="Already have an account?"></TextView>
+
+            <TextView
+                android:id="@+id/signin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/register"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="90dp"
+                android:layout_toRightOf="@+id/para"
+                android:text="Sign In"
+                android:textColor="#072175"></TextView>
+
+
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

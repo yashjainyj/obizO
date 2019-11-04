@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SellerAccount.Seller_info_Activity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        app:navigationIcon="@drawable/arrow_back"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        app:title="Registration"
+        app:titleTextColor="#464444">
+    </androidx.appcompat.widget.Toolbar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
+        android:id="@+id/scrvw">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/bname"
+                android:text="Business Name"
+                android:layout_marginHorizontal="40dp"
+                android:padding="10dp"
+                android:layout_marginTop="30dp"
+                ></TextView>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/edbname"
+                android:layout_below="@id/bname"
+                android:layout_marginHorizontal="30dp"
+                android:padding="10dp"
+                android:inputType="text"
+                android:layout_marginBottom="10dp"
+                ></EditText>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/bdescription"
+                android:text="Description"
+                android:layout_marginHorizontal="40dp"
+                android:padding="10dp"
+                android:layout_below="@id/edbname"
+                ></TextView>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/edbdescription"
+                android:layout_below="@id/bdescription"
+                android:layout_marginHorizontal="30dp"
+                android:padding="10dp"
+                android:inputType="textMultiLine"
+                android:layout_marginBottom="10dp"
+                ></EditText>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/blocalty"
+                android:text="Localty"
+                android:layout_marginHorizontal="40dp"
+                android:padding="10dp"
+                android:layout_below="@id/edbdescription"
+                ></TextView>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/edblocalty"
+                android:layout_below="@id/blocalty"
+                android:layout_marginHorizontal="30dp"
+                android:padding="10dp"
+                android:inputType="textPostalAddress"
+                android:layout_marginBottom="10dp"
+                ></EditText>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/byears"
+                android:text="No of years in Business"
+                android:layout_marginHorizontal="40dp"
+                android:padding="10dp"
+                android:layout_below="@id/edblocalty"
+                ></TextView>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/edbyears"
+                android:layout_below="@id/byears"
+                android:layout_marginHorizontal="30dp"
+                android:padding="10dp"
+                android:inputType="number"
+                android:layout_marginBottom="10dp"
+                ></EditText>
+
+        </RelativeLayout>
+
+    </ScrollView>
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:id="@+id/next"
+        android:text="Next"
+        android:gravity="bottom"
+        android:textAlignment="center"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        ></Button>
+</RelativeLayout>

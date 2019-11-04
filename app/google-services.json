@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "805327112210",
+    "firebase_url": "https://obizo-d777b.firebaseio.com",
+    "project_id": "obizo-d777b",
+    "storage_bucket": "obizo-d777b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:805327112210:android:ad2095cfa6c947784170cb",
+        "android_client_info": {
+          "package_name": "com.example.obizo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "805327112210-h5n99od8egmgchbklipab2ppr7p5vjtl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.obizo",
+            "certificate_hash": "f01b02c50c032ae6f9ac6790a72682a7c4611684"
+          }
+        },
+        {
+          "client_id": "805327112210-ifjt5m9vbmake4lpinreanv14g42rc4f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAj-cD35aFttURNiVm5CXtwabQ9AjDl3RY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "805327112210-ifjt5m9vbmake4lpinreanv14g42rc4f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
