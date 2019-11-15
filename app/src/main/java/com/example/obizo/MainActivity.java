@@ -1,6 +1,7 @@
 package com.example.obizo;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -14,12 +15,16 @@ import androidx.fragment.app.FragmentTabHost;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.obizo.Main.MyOrder;
 import com.example.obizo.NavigationView.Navigation_Home_Fragment;
 import com.example.obizo.NavigationView.Navigation_Timeline_Fragment;
 import com.example.obizo.NavigationView.Navigation_logout_Fragment;
 import com.example.obizo.NavigationView.Navigation_school_Fragment;
 import com.example.obizo.NavigationView.Navigation_settings_Fragment;
 import com.example.obizo.NavigationView.Navigation_work_Fragement;
+import com.example.obizo.UserAccount.Address_Detail;
+import com.example.obizo.UserAccount.Cart_Main;
+import com.example.obizo.seller.Shops_Main;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -49,39 +54,39 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         int id=menuItem.getItemId();
-        if(id==R.id.home){
-            Navigation_Home_Fragment fragment=new Navigation_Home_Fragment();
-            FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.framelayout,fragment,"Home");
-            fragmentTransaction.commit();
+        if(id==R.id.seller){
+            Intent intent = new Intent(MainActivity.this, Shops_Main.class);
+            startActivity(intent);
+            finish();
 
         }
-        else if(id==R.id.work){
+        else if(id==R.id.userLogin){
             Navigation_work_Fragement fragment=new Navigation_work_Fragement();
             FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.framelayout,fragment,"Work");
             fragmentTransaction.commit();
         }
-        else if(id==R.id.school){
-            Navigation_school_Fragment fragment=new Navigation_school_Fragment();
-            FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.framelayout,fragment,"School");
-            fragmentTransaction.commit();
+        else if(id==R.id.address){
+//            Navigation_school_Fragment fragment=new Navigation_school_Fragment();
+//            FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
+//            fragmentTransaction.replace(R.id.framelayout,fragment,"School");
+//            fragmentTransaction.commit();
+            Intent intent = new Intent(MainActivity.this, Address_Detail.class);
+            startActivity(intent);
+            finish();
         }
-        else if(id==R.id.timeline){
-            Navigation_Timeline_Fragment fragment=new Navigation_Timeline_Fragment();
-            FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.framelayout,fragment,"Timeline");
-            fragmentTransaction.commit();
+        else if(id==R.id.order){
+            Intent intent = new Intent(MainActivity.this, MyOrder.class);
+            startActivity(intent);
+            finish();
         }
-        else if(id==R.id.setting)
+        else if(id==R.id.cart)
         {
-            Navigation_settings_Fragment fragment=new Navigation_settings_Fragment();
-            FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.framelayout,fragment,"Setting");
-            fragmentTransaction.commit();
+            Intent intent = new Intent(MainActivity.this, Cart_Main.class);
+            startActivity(intent);
+            finish();
         }
-        else if(id==R.id.logout){
+        else if(id==R.id.nav_share){
             Navigation_logout_Fragment fragment=new Navigation_logout_Fragment();
             FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.framelayout,fragment,"Logout");

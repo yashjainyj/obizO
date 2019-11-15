@@ -24,6 +24,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat" />
+
+        <activity android:name=".UserAccount.Add_Address" android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".UserAccount.Address_Detail" android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".seller.Shops_Main" android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".seller.Show_Item"></activity>
+        <activity android:name=".seller.Add_Item"></activity>
+        <activity android:name=".seller.Add_Shop"></activity>
+        <activity android:name=".Main.ShowItemMain"></activity>
+        <activity android:name=".Main.Product_Detail"></activity>
+        <activity android:name=".UserAccount.Cart_Main"></activity>
+        <activity android:name=".UserAccount.Payment"></activity>
+        <activity android:name=".Main.MyOrder"></activity>
+        <activity android:name=".Main.MyOrder_Info"></activity>
+
+
     </application>
 
 </manifest>
