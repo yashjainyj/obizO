@@ -19,7 +19,6 @@
         android:id="@+id/nav_view"
         android:background="@color/whitecolor"
         app:menu="@menu/activity_main_drawer"
-        app:headerLayout="@layout/navigation_header"
         android:fitsSystemWindows="true"
         android:layout_gravity="start">
 

@@ -1,11 +1,14 @@
 package com.example.obizo.Main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
 
+import com.example.obizo.MainActivity;
 import com.example.obizo.UserAccount.Address_DataModel;
 import com.example.obizo.R;
+import com.example.obizo.seller.Shops_Main;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
@@ -68,5 +71,12 @@ public class MyOrder extends AppCompatActivity {
 
             }
         });
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent  = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

@@ -126,13 +126,14 @@ public class Add_Item extends AppCompatActivity {
 
 
                                 collectionReference = firebaseFirestore.collection("Items");
-                                Item_data_model item_data_model = new Item_data_model(shopId,"",editText[0].getText().toString(),editText[1].getText().toString(),editText[2].getText().toString(),editText[3].getText().toString(),editText[4].getText().toString(), selected_category, profileUrl.toString());
+                                Item_data_model item_data_model = new Item_data_model(shopId,"",editText[0].getText().toString(),editText[1].getText().toString(),editText[2].getText().toString(),editText[3].getText().toString(),editText[4].getText().toString(), selected_category, profileUrl.toString(),FirebaseAuth.getInstance().getUid());
                                 collectionReference.add(item_data_model).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                     @Override
                                     public void onSuccess(DocumentReference documentReference) {
                                         String id = documentReference.getId();
-                                        Item_data_model item_data_model = new Item_data_model(shopId,id,editText[0].getText().toString(),editText[1].getText().toString(),editText[2].getText().toString(),editText[3].getText().toString(),editText[4].getText().toString(), selected_category, profileUrl.toString());
+                                        Item_data_model item_data_model = new Item_data_model(shopId,id,editText[0].getText().toString(),editText[1].getText().toString(),editText[2].getText().toString(),editText[3].getText().toString(),editText[4].getText().toString(), selected_category, profileUrl.toString(),FirebaseAuth.getInstance().getUid());
                                         collectionReference.document(id).set(item_data_model);
+                                        finish();
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
                                     @Override

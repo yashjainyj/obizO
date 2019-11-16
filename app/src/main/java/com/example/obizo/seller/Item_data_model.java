@@ -9,6 +9,7 @@ public class Item_data_model {
     private String itemPrice;
     private String description;
     private String category;
+    private String userId;
     public String getImageUrl() {
         return imageUrl;
     }
@@ -77,7 +78,7 @@ public class Item_data_model {
         this.description = description;
     }
 
-    public Item_data_model(String shopId, String itemId, String itemName, String weight, String quantity, String itemPrice, String description, String category, String imageUrl) {
+    public Item_data_model(String shopId, String itemId, String itemName, String weight, String quantity, String itemPrice, String description, String category, String imageUrl, String userId) {
         this.shopId = shopId;
         this.itemId = itemId;
         this.itemName = itemName;
@@ -87,6 +88,7 @@ public class Item_data_model {
         this.description = description;
         this.category = category;
         this.imageUrl = imageUrl;
+        this.userId = userId;
     }
 
     public String getCategory() {
@@ -95,5 +97,13 @@ public class Item_data_model {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

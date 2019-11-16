@@ -31,7 +31,7 @@ public class Show_Item_Adapter extends RecyclerView.Adapter<Show_Item_Adapter.Ad
     @NonNull
     @Override
     public Adapter_ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view= LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.show_item_layout,viewGroup,false);
+        View view= LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.items,viewGroup,false);
         Adapter_ViewHolder adapter_viewHolder=new Adapter_ViewHolder(view);
         return adapter_viewHolder;
     }
@@ -58,13 +58,13 @@ public class Show_Item_Adapter extends RecyclerView.Adapter<Show_Item_Adapter.Ad
     }
 
     public class Adapter_ViewHolder extends RecyclerView.ViewHolder {
-        CircleImageView item_image;
+        ImageView item_image;
        TextView name,price;
         public Adapter_ViewHolder(@NonNull View itemView) {
             super(itemView);
-            item_image = itemView.findViewById(R.id.image_item);
-            name = itemView.findViewById(R.id.item_name);
-            price = itemView.findViewById(R.id.item_price);
+            item_image = itemView.findViewById(R.id.book_img_id);
+            name = itemView.findViewById(R.id.book_title_id);
+            price = itemView.findViewById(R.id.price);
            // desc = itemView.findViewById(R.id.description);
             //category = itemView.findViewById(R.id.category);
 
