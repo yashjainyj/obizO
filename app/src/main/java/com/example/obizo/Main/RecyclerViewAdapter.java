@@ -1,6 +1,7 @@
 package com.example.obizo.Main;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,9 +11,18 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.obizo.R;
+import com.example.obizo.UserAccount.Payment;
+import com.example.obizo.seller.Shop_Detais_Modal;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -57,6 +67,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             public void onClick(View view) {
                 Log.d(TAG, "onClick: clicked on an image: " + mNames.get(position));
                 Toast.makeText(mContext, mNames.get(position), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(mContext,ShowItemMain.class);
+                intent.putExtra("cat",mNames.get(position));
+                mContext.startActivity(intent);
             }
         });
     }

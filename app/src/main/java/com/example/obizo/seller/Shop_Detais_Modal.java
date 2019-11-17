@@ -10,10 +10,11 @@ public class Shop_Detais_Modal {
     private String contact_number;
     private String upi;
     private String userId;
+    private String emailid;
 
     public Shop_Detais_Modal() {
     }
-    public Shop_Detais_Modal(String shop_Id, String shop_Name, String shop_Address, String shop_rating, String min, String image_Url, String contact_number, String upi, String userId) {
+    public Shop_Detais_Modal(String shop_Id, String shop_Name, String shop_Address, String shop_rating, String min, String image_Url, String contact_number, String upi, String userId, String emailid) {
         this.shop_Id = shop_Id;
         this.shop_Name = shop_Name;
         this.shop_Address = shop_Address;
@@ -23,6 +24,7 @@ public class Shop_Detais_Modal {
         this.contact_number = contact_number;
         this.upi = upi;
         this.userId = userId;
+        this.emailid = emailid;
     }
 
     public String getShop_Id() {
@@ -94,6 +96,14 @@ public class Shop_Detais_Modal {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public String getEmailid() {
+        return emailid;
+    }
+
+    public void setEmailid(String emailid) {
+        this.emailid = emailid;
     }
 }
 

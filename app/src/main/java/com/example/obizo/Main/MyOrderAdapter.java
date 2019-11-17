@@ -34,7 +34,7 @@ public class MyOrderAdapter  extends RecyclerView.Adapter<MyOrderAdapter.Adapter
     @NonNull
     @Override
     public Adapter_ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view= LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.shop_main_layout,viewGroup,false);
+        View view= LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.items,viewGroup,false);
         Adapter_ViewHolder adapter_viewHolder=new Adapter_ViewHolder(view);
         return adapter_viewHolder;
     }
@@ -49,6 +49,7 @@ public class MyOrderAdapter  extends RecyclerView.Adapter<MyOrderAdapter.Adapter
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 Item_data_model item_data_model = documentSnapshot.toObject(Item_data_model.class);
                 adapter_viewHolder.name1.setText(item_data_model.getItemName());
+                adapter_viewHolder.name.setText("Rs."+item_data_model.getItemPrice());
                 Glide.with(context).load(item_data_model.getImageUrl()).into(adapter_viewHolder.image);
                 adapter_viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -71,11 +72,11 @@ public class MyOrderAdapter  extends RecyclerView.Adapter<MyOrderAdapter.Adapter
         TextView name,name1;
         public Adapter_ViewHolder(@NonNull View itemView) {
             super(itemView);
-            name = itemView.findViewById(R.id.shop_name);
-            name1 = itemView.findViewById(R.id.shop_address);
+            name = itemView.findViewById(R.id.price);
+            name1 = itemView.findViewById(R.id.book_title_id);
             // desc = itemView.findViewById(R.id.description);
             //category = itemView.findViewById(R.id.category);
-        image = itemView.findViewById(R.id.shop_image);
+        image = itemView.findViewById(R.id.book_img_id);
         }
     }
 }

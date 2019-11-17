@@ -6,9 +6,11 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.obizo.R;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
@@ -33,6 +35,9 @@ public class Show_Item extends AppCompatActivity {
     private CollectionReference collectionReference ;
     private FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
     ArrayList<Item_data_model> arrayList;
+
+    ShimmerFrameLayout shimmerFrameLayout;
+    RelativeLayout relativeLayout;
     String shopId;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,6 +49,8 @@ public class Show_Item extends AppCompatActivity {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(ContextCompat.getColor(this,R.color.colorPrimaryDark));
         Intent intent = getIntent();
+        shimmerFrameLayout = findViewById(R.id.shimmer);
+        relativeLayout = findViewById(R.id.rel1);
         shopId= intent.getStringExtra("shopId");
         Toast.makeText(this, shopId, Toast.LENGTH_SHORT).show();
         add = findViewById(R.id.add_item);
@@ -82,6 +89,9 @@ public class Show_Item extends AppCompatActivity {
                 Show_Item_Adapter show_item_adapter = new Show_Item_Adapter(Show_Item.this,arrayList);
                 recyclerView.setAdapter(show_item_adapter);
                 recyclerView.setLayoutManager(layoutManager);
+                shimmerFrameLayout.stopShimmer();
+                shimmerFrameLayout.setVisibility(View.GONE);
+                relativeLayout.setVisibility(View.VISIBLE);
               }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -99,4 +109,16 @@ public class Show_Item extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+    @Override
+    public void onResume() {
+        super.onResume();
+        shimmerFrameLayout.startShimmer();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        shimmerFrameLayout.stopShimmer();
+    }
+
 }

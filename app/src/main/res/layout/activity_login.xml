@@ -7,6 +7,16 @@
     tools:context=".Login.LoginActivity">
 
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -16,27 +26,47 @@
         android:src="@drawable/ic_launcher_background">
     </ImageView>
 
-    <com.google.android.material.textfield.TextInputEditText
+
+
+
+
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:padding="15dp"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="20dp"
-        android:hint="Email or phone number"
-        android:id="@+id/username"
-        android:inputType="textEmailAddress"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        style="@style/Widget.Shrine.TextInputLayout"
+        android:id="@+id/email1"
+        android:layout_marginRight="20dp"
         android:layout_below="@+id/logo"
-        >
-    </com.google.android.material.textfield.TextInputEditText>
+        android:hint="Enter Email id">
+
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:padding="15dp"
+            android:id="@+id/username"
+            android:inputType="textEmailAddress"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/logo"
+            >
+        </com.google.android.material.textfield.TextInputEditText>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/etPasswordLayout"
         android:layout_width="match_parent"
-        android:layout_below="@+id/username"
-        android:layout_marginHorizontal="30dp"
-        android:hint="password"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        style="@style/Widget.Shrine.TextInputLayout"
+        android:layout_marginRight="20dp"
+        android:layout_below="@+id/email1"
         app:passwordToggleEnabled="true"
+        android:hint="Enter Password"
+
         >
 
         <com.google.android.material.textfield.TextInputEditText
@@ -73,43 +103,29 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/forgetpass"
         android:layout_marginLeft="30dp"
-
         android:text="Don't have account?   "
         android:id="@+id/question"
         >
     </TextView>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/forgetpass"
-        android:layout_toRightOf="@+id/question"
-        android:text="Sign Up"
-        android:id="@+id/signup"
-        android:textColor="#0C42D1"
-        >
-    </TextView>
 
-    <TableRow
-        android:layout_width="match_parent"
-        android:background="@color/colorPrimaryDark"
-        android:layout_below="@+id/question"
-        android:layout_marginHorizontal="70dp"
-        android:layout_marginTop="28dp"
-        android:layout_height="1dp">
-    </TableRow>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#ffffff"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/question"
-        android:layout_margin="20dp"
-        android:paddingHorizontal="20dp"
-        android:text="OR"
-        android:textAlignment="center"
-        >
-    </TextView>
 
+
+
+<Button
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/question"
+    android:layout_marginHorizontal="20dp"
+    android:text="Sign In With Others"
+    android:background="#00C6C4CA"
+    android:id="@+id/signinwithOthers"
+    android:layout_marginBottom="20dp"
+
+    />
+
+        </RelativeLayout>
+
+    </ScrollView>
 
 </RelativeLayout>

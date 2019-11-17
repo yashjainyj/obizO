@@ -1,10 +1,14 @@
 package com.example.obizo.UserAccount;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,8 +17,10 @@ import com.example.obizo.seller.Item_data_model;
 import com.example.obizo.seller.Shops_Main;
 import com.example.obizo.MainActivity;
 import com.example.obizo.R;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -33,6 +39,7 @@ import java.util.Set;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -40,9 +47,11 @@ import androidx.recyclerview.widget.RecyclerView;
 public class Cart_Main extends AppCompatActivity {
     RecyclerView recyclerView;
     DatabaseReference databaseReference;
+    ShimmerFrameLayout shimmerFrameLayout;
     DocumentReference documentReference;
     TextView subtotal,price;
     Button buy;
+     ArrayList<String> s1 = new ArrayList<>();
     FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,16 +61,90 @@ public class Cart_Main extends AppCompatActivity {
         price = findViewById(R.id.price);
         price.setText("Rs.0");
         recyclerView = findViewById(R.id.recyclerview);
+        shimmerFrameLayout = findViewById(R.id.shimmer);
         buy = findViewById(R.id.buy_now);
         buy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Cart_Main.this,Payment.class);
-                intent.putExtra("amount",price.getText());
-                startActivity(intent);
-                finish();
+                selectAddress();
             }
         });
+    }
+
+    private void selectAddress() {
+        final ArrayList<Address_DataModel>list=new ArrayList<>();
+        list.clear();
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        databaseReference = FirebaseDatabase.getInstance().getReference().child(firebaseAuth.getCurrentUser().getUid()).child("Address");
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                s1.clear();
+                list.clear();
+                if(dataSnapshot.exists())
+                {
+                    // Address_DataModel address_dataModel = dataSnapshot.getValue(Address_DataModel.class);
+                    for (DataSnapshot dsp : dataSnapshot.getChildren()) {
+                        list.add(dsp.getValue(Address_DataModel.class));
+                    }
+
+                    s1.clear();
+                    for(Address_DataModel address_dataModel :list)
+                    {
+                        String s ="";
+                        s=s+" "+ address_dataModel.getSalutation()+address_dataModel.getName()+"\n";
+                        s = s+address_dataModel.getFlat() +"\n";
+                        s=s+ address_dataModel.getLocality()+"\n";
+                        s=s+address_dataModel.getStreet()+"\n";
+                        s=s+address_dataModel.getNickname()+"\n";
+                        s1.add(s);
+                    }
+                    final AlertDialog.Builder builder = new AlertDialog.Builder(Cart_Main.this);
+                    builder.setTitle("Select Address");
+                    View view = getLayoutInflater().inflate(R.layout.select_address_listview,null);
+                    ListView listView = view.findViewById(R.id.list_item);
+                    TextInputEditText addaddress;
+                    addaddress = view.findViewById(R.id.add_address);
+                    addaddress.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(Cart_Main.this,Add_Address.class);
+                            intent.putExtra("or","1");
+                            startActivity(intent);
+                            finish();
+                        }
+                    });
+                    ArrayAdapter<String> address_dataModelArrayAdapter = new ArrayAdapter<>(Cart_Main.this,android.R.layout.simple_list_item_1,s1);
+                    listView.setAdapter(address_dataModelArrayAdapter);
+                    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                            Intent intent = new Intent(Cart_Main.this,Payment.class);
+                            intent.putExtra("amount",price.getText().toString());
+                            intent.putExtra("address_id",list.get(position).getKey());
+                            Log.d("", "onItemClick: "+ list.get(position).getKey());
+                            builder.create().dismiss();
+                            startActivity(intent);
+                            finish();
+                        }
+                    });
+                    builder.setView(view);
+                    if(!((Activity) Cart_Main.this).isFinishing())
+                    {
+                        //show dialog
+                        builder.show();
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+
     }
 
     @Override
@@ -113,6 +196,9 @@ public class Cart_Main extends AppCompatActivity {
                                 }
                             }
                             price.setText("Rs "+price1+"");
+                            shimmerFrameLayout.stopShimmer();
+                            shimmerFrameLayout.setVisibility(View.GONE);
+                            recyclerView.setVisibility(View.VISIBLE);
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -134,5 +220,15 @@ public class Cart_Main extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
+    }
+    public void onResume() {
+        super.onResume();
+        shimmerFrameLayout.startShimmer();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        shimmerFrameLayout.stopShimmer();
     }
 }

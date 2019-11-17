@@ -70,7 +70,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fragmentTransaction.commit();
         if (FirebaseAuth.getInstance().getCurrentUser()!=null)
         {
-
             View view = getLayoutInflater().inflate(R.layout.navigation_header,null);
             TextView name = view.findViewById(R.id.name);
             TextView number = view.findViewById(R.id.email);
@@ -79,6 +78,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             name.setText(s[0]);
             navigationView.addHeaderView(view);
             navigationView.setNavigationItemSelectedListener(this);
+        }
+        else
+        {
+            Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+            startActivity(intent);
+            finish();
         }
     }
 

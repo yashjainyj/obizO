@@ -12,7 +12,6 @@ import android.widget.Toast;
 
 import com.example.obizo.MainActivity;
 import com.example.obizo.R;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -31,8 +30,6 @@ import com.theartofdev.edmodo.cropper.CropImage;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Add_Shop extends AppCompatActivity {
@@ -52,7 +49,7 @@ public class Add_Shop extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_shop);
 
-        textInputEditTexts = new TextInputEditText[]{findViewById(R.id.shop_name), findViewById(R.id.shop_address), findViewById(R.id.min), findViewById(R.id.raiting), findViewById(R.id.shop_phone), findViewById(R.id.upi)};
+        textInputEditTexts = new TextInputEditText[]{findViewById(R.id.shop_name), findViewById(R.id.shop_address), findViewById(R.id.min), findViewById(R.id.raiting), findViewById(R.id.shop_phone), findViewById(R.id.upi), findViewById(R.id.email)};
         setTitle("Add Shop");
         circleImageView = findViewById(R.id.circleImageView);
         storageReference = FirebaseStorage.getInstance().getReference();
@@ -96,14 +93,14 @@ public class Add_Shop extends AppCompatActivity {
                         textInputEditTexts[3].setText(shop_detais_modal.getShop_rating());
                         textInputEditTexts[4].setText(shop_detais_modal.getContact_number());
                         textInputEditTexts[5].setText(shop_detais_modal.getUpi());
-
+                    textInputEditTexts[6].setText(shop_detais_modal.getEmailid());
 
                     add.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
 
                             boolean checked=false;
-                            for (int i=0;i<6;i++)
+                            for (int i=0;i<7;i++)
                             {
                                 if(textInputEditTexts[i].getText().toString().equalsIgnoreCase(""))
                                 {
@@ -134,7 +131,7 @@ public class Add_Shop extends AppCompatActivity {
                                         //profileUrl = taskSnapshot.getStorage().getDownloadUrl().getResult();
 
                                         databaseReference = FirebaseDatabase.getInstance().getReference().child("Shopes").child(shopId);
-                                        Shop_Detais_Modal shop_detais_modal1 = new Shop_Detais_Modal(shopId,textInputEditTexts[0].getText().toString(),textInputEditTexts[1].getText().toString(),textInputEditTexts[3].getText().toString(),textInputEditTexts[2].getText().toString(),profileUrl.toString(),textInputEditTexts[4].getText().toString(),textInputEditTexts[5].getText().toString(),FirebaseAuth.getInstance().getUid());
+                                        Shop_Detais_Modal shop_detais_modal1 = new Shop_Detais_Modal(shopId,textInputEditTexts[0].getText().toString(),textInputEditTexts[1].getText().toString(),textInputEditTexts[3].getText().toString(),textInputEditTexts[2].getText().toString(),profileUrl.toString(),textInputEditTexts[4].getText().toString(),textInputEditTexts[5].getText().toString(),FirebaseAuth.getInstance().getUid(), textInputEditTexts[6].getText().toString());
                                         databaseReference.setValue(shop_detais_modal1);
                                         Toast.makeText(Add_Shop.this, "Shop Added", Toast.LENGTH_SHORT).show();
                                         progressDialog.cancel();
@@ -176,7 +173,7 @@ public class Add_Shop extends AppCompatActivity {
             public void onClick(View v) {
 
                 boolean checked=false;
-                for (int i=0;i<6;i++)
+                for (int i=0;i<7;i++)
                 {
                     if(textInputEditTexts[i].getText().toString().equalsIgnoreCase(""))
                     {
@@ -209,7 +206,7 @@ public class Add_Shop extends AppCompatActivity {
                             DatabaseReference databaseReference1 = databaseReference.push();
                             String s1 = databaseReference1.getKey();
                             databaseReference = FirebaseDatabase.getInstance().getReference().child("Shopes").child(s1);
-                            Shop_Detais_Modal shop_detais_modal1 = new Shop_Detais_Modal(s1,textInputEditTexts[0].getText().toString(),textInputEditTexts[1].getText().toString(),textInputEditTexts[3].getText().toString(),textInputEditTexts[2].getText().toString(),profileUrl.toString(),textInputEditTexts[4].getText().toString(),textInputEditTexts[5].getText().toString(),FirebaseAuth.getInstance().getUid());
+                            Shop_Detais_Modal shop_detais_modal1 = new Shop_Detais_Modal(s1,textInputEditTexts[0].getText().toString(),textInputEditTexts[1].getText().toString(),textInputEditTexts[3].getText().toString(),textInputEditTexts[2].getText().toString(),profileUrl.toString(),textInputEditTexts[4].getText().toString(),textInputEditTexts[5].getText().toString(),FirebaseAuth.getInstance().getUid(), textInputEditTexts[6].getText().toString());
                             databaseReference1.setValue(shop_detais_modal1);
                             Toast.makeText(Add_Shop.this, "Shop Added", Toast.LENGTH_SHORT).show();
                             progressDialog.cancel();

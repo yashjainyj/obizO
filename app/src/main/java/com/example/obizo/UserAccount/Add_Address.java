@@ -36,6 +36,7 @@ public class Add_Address extends AppCompatActivity {
     RadioButton radioButton;
     DatabaseReference databaseReference;
     FirebaseAuth mAuth;
+    String or;
     int flag=0;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -59,6 +60,7 @@ public class Add_Address extends AppCompatActivity {
         radioGroup= findViewById(R.id.radiogroup);
         add = findViewById(R.id.submit);
         Intent intent = getIntent();
+
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,6 +84,8 @@ public class Add_Address extends AppCompatActivity {
             }
         });
         String s = intent.getStringExtra("s");
+
+        or = intent.getStringExtra("or");
         if(s!=null)
         {
             editAddress(s);
@@ -236,9 +240,17 @@ public class Add_Address extends AppCompatActivity {
                                     Address_DataModel address_dataModel1 = new Address_DataModel(s1,radioButton.getText().toString(),name.getText().toString(),flat.getText().toString(),street.getText().toString(),locality.getText().toString(),s);
                                     databaseReference1.setValue(address_dataModel1);
                                     Toast.makeText(Add_Address.this, "Address Added", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(Add_Address.this,Address_Detail.class);
-                                    startActivity(intent);
-                                    finish();
+                                   if(or!=null)
+                                   {
+                                       Intent intent = new Intent(Add_Address.this,Cart_Main.class);
+                                       startActivity(intent);
+                                       finish();
+                                   }
+                                   else{
+                                       Intent intent = new Intent(Add_Address.this,Address_Detail.class);
+                                       startActivity(intent);
+                                       finish();
+                                   }
                                 }
                                 else {
                                     locality.setFocusable(true);

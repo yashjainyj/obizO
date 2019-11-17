@@ -14,10 +14,13 @@ import android.widget.Button;
 import android.widget.Toast;
 
 
+import com.example.obizo.Main.JavaMailAPI;
 import com.example.obizo.Main.OrderModel;
 import com.example.obizo.MainActivity;
 import com.example.obizo.R;
 import com.example.obizo.seller.Item_data_model;
+import com.example.obizo.seller.Shop_Detais_Modal;
+import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
@@ -49,7 +52,7 @@ public class Payment extends AppCompatActivity {
     Button submit;
     final int UPI_PAYMENT = 0;
 DatabaseReference databaseReference;
-    String am="";
+    String am="",address="";
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +64,8 @@ DatabaseReference databaseReference;
         submit=findViewById(R.id.submit);
         Intent intent = getIntent();
         String amount1 = intent.getStringExtra("amount");
+        address = intent.getStringExtra("address_id");
+        Log.d("", "onCreate: " + address);
         amount.setText(amount1);
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,7 +79,9 @@ DatabaseReference databaseReference;
                 } else if (TextUtils.isEmpty(message.getText().toString().trim())) {
                     message.setError("Required");
                 } else {
-                    payUsingUpi("Yash", "jainyash031@okicici", message.getText().toString(), amount.getText().toString());
+                    String a[] = amount.getText().toString().split(" ");
+                    Log.d("", "onClick: " + a[1]);
+                    payUsingUpi("Yash", "jainyash031@okicici", message.getText().toString(), a[1]);
                 }
             }
 
@@ -164,6 +171,8 @@ DatabaseReference databaseReference;
                 databaseReference = FirebaseDatabase.getInstance().getReference().child(firebaseAuth.getCurrentUser().getUid()).child("Cart");
                 final List<String> list = new ArrayList<>();
                 final String finalApprovalRefNo = approvalRefNo;
+                final String finalApprovalRefNo1 = approvalRefNo;
+                final String finalApprovalRefNo2 = approvalRefNo;
                 databaseReference.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -174,7 +183,7 @@ DatabaseReference databaseReference;
                             list.add(s);
                         }
                         databaseReference = FirebaseDatabase.getInstance().getReference();
-                        for (String itemId : list)
+                        for (final String itemId : list)
                         {
 
                             DocumentReference documentReference;
@@ -183,32 +192,54 @@ DatabaseReference databaseReference;
                             documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                 @Override
                                 public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                    Item_data_model item_data_model = documentSnapshot.toObject(Item_data_model.class);
+                                    final Item_data_model item_data_model = documentSnapshot.toObject(Item_data_model.class);
                                     am = item_data_model.getItemPrice();
+
+                                    databaseReference = FirebaseDatabase.getInstance().getReference().child("Shopes").child(item_data_model.getShopId());
+                                    databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                            Shop_Detais_Modal shop_detais_modal = dataSnapshot.getValue(Shop_Detais_Modal.class);
+                                            //Toast.makeText(Payment.this, shop_detais_modal.getUserId(), Toast.LENGTH_SHORT).show();
+                                           final String  shopemail = shop_detais_modal.getEmailid();
+                                            databaseReference = FirebaseDatabase.getInstance().getReference().child(firebaseAuth.getCurrentUser().getUid()).child("MyOrder");
+                                            DatabaseReference databaseReference1 = databaseReference.push();
+                                            String s1 = databaseReference1.getKey();
+                                            databaseReference = FirebaseDatabase.getInstance().getReference().child(firebaseAuth.getCurrentUser().getUid()).child("MyOrder").child(s1);
+                                            Date c = Calendar.getInstance().getTime();
+                                            SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
+                                            String formattedDate = df.format(c);
+                                            Toast.makeText(Payment.this, am, Toast.LENGTH_SHORT).show();
+                                            OrderModel orderModel = new OrderModel(s1,itemId,formattedDate,finalApprovalRefNo,am,address );
+                                            databaseReference1.setValue(orderModel);
+                                            AlertDialog.Builder builder = new AlertDialog.Builder(Payment.this);
+                                            builder.setTitle("Ordered Confirmed");
+                                            builder.setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    Intent intent = new Intent(Payment.this, MainActivity.class);
+                                                    JavaMailAPI javaMailAPI = new JavaMailAPI(Payment.this, FirebaseAuth.getInstance().getCurrentUser().getEmail(),"Order Confirmation","Your order " + item_data_model.getItemName() + "is placed in 3-4 working days" + " Total Amount is " + amount.getText().toString()
+                                                            + "\n" + "Reference number"  + finalApprovalRefNo2);
+                                                    javaMailAPI.execute();
+                                                    JavaMailAPI javaMailAPI1 = new JavaMailAPI(Payment.this,shopemail,"Order Received"," order " + item_data_model.getItemName() + "is received" + " Total Amount paid " + amount.getText().toString()+ "\n" + "Reference number"  + finalApprovalRefNo2);
+                                                    javaMailAPI1.execute();
+                                                    startActivity(intent);
+                                                    finishAffinity();
+                                                    finish();
+                                                }
+                                            });
+                                            builder.create().show();
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                        }
+                                    });
+
                                 }
                             });
-                            databaseReference = FirebaseDatabase.getInstance().getReference().child(firebaseAuth.getCurrentUser().getUid()).child("MyOrder");
-                            DatabaseReference databaseReference1 = databaseReference.push();
-                            String s1 = databaseReference1.getKey();
-                            databaseReference = FirebaseDatabase.getInstance().getReference().child(firebaseAuth.getCurrentUser().getUid()).child("MyOrder").child(s1);
-                            Date c = Calendar.getInstance().getTime();
-                            SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
-                            String formattedDate = df.format(c);
-                            Toast.makeText(Payment.this, am, Toast.LENGTH_SHORT).show();
-                            OrderModel orderModel = new OrderModel(s1,itemId,formattedDate,finalApprovalRefNo,am,"");
-                            databaseReference1.setValue(orderModel);
-                            AlertDialog.Builder builder = new AlertDialog.Builder(Payment.this);
-                            builder.setTitle("Ordered Confirmed");
-                            builder.setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    Intent intent = new Intent(Payment.this, MainActivity.class);
-                                    startActivity(intent);
-                                    finishAffinity();
-                                    finish();
-                                }
-                            });
-                            builder.create().show();
+
                         }
                     }
                     @Override

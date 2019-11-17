@@ -6,10 +6,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.obizo.MainActivity;
 import com.example.obizo.R;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -34,6 +36,8 @@ public class Address_Detail extends AppCompatActivity {
     RecyclerView recyclerView;
     DatabaseReference databaseReference;
     FirebaseAuth auth;
+    ShimmerFrameLayout shimmerFrameLayout;
+    RelativeLayout relativeLayout;
     List<Address_DataModel> list = new ArrayList<>();
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,6 +46,7 @@ public class Address_Detail extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         setTitle("Address");
+        shimmerFrameLayout = findViewById(R.id.shimmer);
         auth = FirebaseAuth.getInstance();
         Window window = this.getWindow();
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
@@ -88,6 +93,9 @@ public class Address_Detail extends AppCompatActivity {
                     Address_Adapter address_adapter = new Address_Adapter(Address_Detail.this,list);
                     //address_adapter.notifyDataSetChanged();
                     recyclerView.setAdapter(address_adapter);
+                    shimmerFrameLayout.stopShimmer();
+                    shimmerFrameLayout.setVisibility(View.GONE);
+                    recyclerView.setVisibility(View.VISIBLE);
                     //list.add(address_dataModel);
                 }
             }
@@ -98,7 +106,17 @@ public class Address_Detail extends AppCompatActivity {
         });
 
     }
+    @Override
+    public void onResume() {
+        super.onResume();
+        shimmerFrameLayout.startShimmer();
+    }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        shimmerFrameLayout.stopShimmer();
+    }
     @Override
     public void onBackPressed() {
         super.onBackPressed();

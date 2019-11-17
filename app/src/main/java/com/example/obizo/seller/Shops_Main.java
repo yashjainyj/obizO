@@ -5,10 +5,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.obizo.MainActivity;
 import com.example.obizo.R;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -32,6 +34,8 @@ public class Shops_Main extends AppCompatActivity {
     DatabaseReference databaseReference;
     FloatingActionButton add;
     boolean checked=false;
+    ShimmerFrameLayout shimmerFrameLayout;
+    RelativeLayout relativeLayout;
     List<Shop_Detais_Modal> list = new ArrayList<>();
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,6 +50,8 @@ public class Shops_Main extends AppCompatActivity {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(ContextCompat.getColor(this,R.color.colorPrimaryDark));
         recyclerView = findViewById(R.id.recyclerview);
+        shimmerFrameLayout = findViewById(R.id.shimmer);
+        relativeLayout = findViewById(R.id.rel1);
 //        databaseReference = FirebaseDatabase.getInstance().getReference().child("Shopes");
 //        if(databaseReference==null)
 //        {
@@ -89,6 +95,9 @@ public class Shops_Main extends AppCompatActivity {
                         Shop_Main_Adapter shop_main_adapter = new Shop_Main_Adapter(Shops_Main.this, list);
                         recyclerView.setAdapter(shop_main_adapter);
                         recyclerView.setHasFixedSize(true);
+                        shimmerFrameLayout.stopShimmer();
+                        shimmerFrameLayout.setVisibility(View.GONE);
+                        relativeLayout.setVisibility(View.VISIBLE);
                         add.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -130,5 +139,16 @@ public class Shops_Main extends AppCompatActivity {
         Intent intent  = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        shimmerFrameLayout.startShimmer();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        shimmerFrameLayout.stopShimmer();
     }
 }

@@ -3,7 +3,9 @@ package com.example.obizo.Main;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -11,6 +13,7 @@ import com.example.obizo.seller.Item_data_model;
 import com.example.obizo.seller.Shop_Detais_Modal;
 import com.example.obizo.R;
 import com.example.obizo.UserAccount.Address_DataModel;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -33,10 +36,15 @@ public class MyOrder_Info extends AppCompatActivity {
     String orderId,itemId,addressId,shopId;
     TextView date,refer,total,name,price,s_address,b_address,item,finaltotal,shop_name;
     ImageView imageView;
+    ShimmerFrameLayout shimmerFrameLayout;
+    ScrollView relativeLayout;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.order_info);
+        shimmerFrameLayout = findViewById(R.id.shimmer);
+        relativeLayout = findViewById(R.id.rel1);
         Intent intent = getIntent();
         date = findViewById(R.id.order_date);
         refer = findViewById(R.id.order_ref);
@@ -106,7 +114,9 @@ public class MyOrder_Info extends AppCompatActivity {
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 Shop_Detais_Modal shop_detais_modal = dataSnapshot.getValue(Shop_Detais_Modal.class);
                                 shop_name.setText(shop_detais_modal.getShop_Name());
-
+                                shimmerFrameLayout.stopShimmer();
+                                shimmerFrameLayout.setVisibility(View.GONE);
+                                relativeLayout.setVisibility(View.VISIBLE);
                             }
 
                             @Override
@@ -124,5 +134,17 @@ public class MyOrder_Info extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        shimmerFrameLayout.startShimmer();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        shimmerFrameLayout.stopShimmer();
     }
 }

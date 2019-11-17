@@ -7,4 +7,5 @@
     <color name="list_item_title">#AAAAAA</color>
     <color name="list_group_title">#808080</color>
     <color name="whitecolor">#ffffff</color>
+    <color name="shimmer">#ECEAEA</color>
 </resources>

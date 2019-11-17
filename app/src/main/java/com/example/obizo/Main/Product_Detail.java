@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,6 +17,7 @@ import com.example.obizo.R;
 import com.example.obizo.UserAccount.Cart_Main;
 import com.example.obizo.seller.Item_data_model;
 import com.example.obizo.seller.Shop_Detais_Modal;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
@@ -47,11 +49,16 @@ public class Product_Detail extends AppCompatActivity {
     FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
     String item_id,shopId;
     DatabaseReference databaseReference;
+    ShimmerFrameLayout shimmerFrameLayout;
+    ScrollView relativeLayout;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.product_info_layout);
         Intent intent = getIntent();
+        shimmerFrameLayout = findViewById(R.id.shimmer);
+        relativeLayout = findViewById(R.id.rel1);
         item_id = intent.getStringExtra("item_id");
         init();
         addToCart.setOnClickListener(new View.OnClickListener() {
@@ -133,6 +140,9 @@ public class Product_Detail extends AppCompatActivity {
                                 Shop_Detais_Modal shop_detais_modal = dataSnapshot.getValue(Shop_Detais_Modal.class);
                                 seller_name.setText(shop_detais_modal.getShop_Name());
                                 product_raiting.setText(shop_detais_modal.getShop_rating());
+                                shimmerFrameLayout.stopShimmer();
+                                shimmerFrameLayout.setVisibility(View.GONE);
+                                relativeLayout.setVisibility(View.VISIBLE);
                             }
 
                             @Override
@@ -148,5 +158,16 @@ public class Product_Detail extends AppCompatActivity {
                 Toast.makeText(Product_Detail.this, "Failed", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        shimmerFrameLayout.startShimmer();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        shimmerFrameLayout.stopShimmer();
     }
 }

@@ -52,6 +52,7 @@ public class Navigation_Home_Fragment extends Fragment {
     private CollectionReference collectionReference ;
     private FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
     ArrayList<Item_data_model> arrayList;
+
     RecyclerView recyclerView1;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
