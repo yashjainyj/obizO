@@ -23,6 +23,7 @@ import com.example.obizo.R;
 import com.example.obizo.seller.Item_data_model;
 import com.example.obizo.seller.Show_Item;
 import com.example.obizo.seller.Show_Item_Adapter;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -52,7 +53,7 @@ public class Navigation_Home_Fragment extends Fragment {
     private CollectionReference collectionReference ;
     private FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
     ArrayList<Item_data_model> arrayList;
-
+    ShimmerFrameLayout shimmerFrameLayout;
     RecyclerView recyclerView1;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,7 +63,7 @@ public class Navigation_Home_Fragment extends Fragment {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_navigation__home_, container, false);
         SliderView sliderView = view.findViewById(R.id.imageSlider);
-
+    shimmerFrameLayout = view.findViewById(R.id.shimmer);
         SliderAdapterExample adapter1 = new SliderAdapterExample(getActivity());
         getImages();
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
@@ -156,6 +157,9 @@ public class Navigation_Home_Fragment extends Fragment {
                Show_Item_Adapter myAdapter = new Show_Item_Adapter(getActivity(),arrayList);
                 recyclerView1.setLayoutManager(new GridLayoutManager(getContext(),2));
                 recyclerView1.setAdapter(myAdapter);
+                shimmerFrameLayout.stopShimmer();
+                shimmerFrameLayout.setVisibility(View.GONE);
+                recyclerView1.setVisibility(View.VISIBLE);
 
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -166,5 +170,16 @@ public class Navigation_Home_Fragment extends Fragment {
             }
         });
 
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        shimmerFrameLayout.startShimmer();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        shimmerFrameLayout.stopShimmer();
     }
 }
