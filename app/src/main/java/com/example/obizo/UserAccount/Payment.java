@@ -223,6 +223,9 @@ DatabaseReference databaseReference;
                                                     javaMailAPI.execute();
                                                     JavaMailAPI javaMailAPI1 = new JavaMailAPI(Payment.this,shopemail,"Order Received"," order " + item_data_model.getItemName() + "is received" + " Total Amount paid " + amount.getText().toString()+ "\n" + "Reference number"  + finalApprovalRefNo2);
                                                     javaMailAPI1.execute();
+                                                    JavaMailAPI javaMailAPI3 = new JavaMailAPI(Payment.this,"Sagar.singh9759@gmail.com","Order Received"," order id " + item_data_model.getItemId() + "\n Name :"+ item_data_model.getItemName() +  "  is received" + " Total Amount paid " + amount.getText().toString()+ "\n" + "Reference number"  + finalApprovalRefNo2);
+                                                    javaMailAPI3.execute();
+
                                                     startActivity(intent);
                                                     finishAffinity();
                                                     finish();
@@ -272,6 +275,5 @@ DatabaseReference databaseReference;
             }
         }
         return false;
-
     }
 }

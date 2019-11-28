@@ -51,6 +51,7 @@ public class Cart_Main extends AppCompatActivity {
     DocumentReference documentReference;
     TextView subtotal,price;
     Button buy;
+    String shopId;
      ArrayList<String> s1 = new ArrayList<>();
     FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
     @Override

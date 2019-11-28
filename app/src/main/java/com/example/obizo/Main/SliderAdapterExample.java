@@ -15,7 +15,7 @@ public class SliderAdapterExample extends SliderViewAdapter<SliderAdapterExample
 
     private Context context;
 
-    public SliderAdapterExample(Context context) {
+    public  SliderAdapterExample(Context context) {
         this.context = context;
     }
 
