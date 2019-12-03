@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.obizo.R;
@@ -35,7 +36,7 @@ public class Show_Item extends AppCompatActivity {
     private CollectionReference collectionReference ;
     private FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
     ArrayList<Item_data_model> arrayList;
-
+TextView textView;
     ShimmerFrameLayout shimmerFrameLayout;
     RelativeLayout relativeLayout;
     String shopId;
@@ -45,6 +46,7 @@ public class Show_Item extends AppCompatActivity {
         setContentView(R.layout.shops_items);
         Window window = this.getWindow();
         setTitle("Items");
+        textView  = findViewById(R.id.itemavail);
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(ContextCompat.getColor(this,R.color.colorPrimaryDark));
@@ -82,16 +84,24 @@ public class Show_Item extends AppCompatActivity {
                     if(item_data_model.getShopId().equalsIgnoreCase(shopId))
                     {
                             arrayList.add(item_data_model);
-                        Toast.makeText(Show_Item.this, item_data_model.getItemName(), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(Show_Item.this, item_data_model.getItemName(), Toast.LENGTH_SHORT).show();
                     }
                 }
-                RecyclerView.LayoutManager layoutManager = new GridLayoutManager(Show_Item.this,2);
-                Show_Item_Adapter show_item_adapter = new Show_Item_Adapter(Show_Item.this,arrayList);
-                recyclerView.setAdapter(show_item_adapter);
-                recyclerView.setLayoutManager(layoutManager);
+                if(!arrayList.isEmpty())
+                {
+                    RecyclerView.LayoutManager layoutManager = new GridLayoutManager(Show_Item.this,2);
+                    Show_Item_Adapter show_item_adapter = new Show_Item_Adapter(Show_Item.this,arrayList);
+                    recyclerView.setAdapter(show_item_adapter);
+                    recyclerView.setLayoutManager(layoutManager);
+                    relativeLayout.setVisibility(View.VISIBLE);
+                }
+                else
+                {
+                    textView.setVisibility(View.VISIBLE);
+                }
                 shimmerFrameLayout.stopShimmer();
                 shimmerFrameLayout.setVisibility(View.GONE);
-                relativeLayout.setVisibility(View.VISIBLE);
+
               }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -107,7 +117,7 @@ public class Show_Item extends AppCompatActivity {
         super.onBackPressed();
         Intent intent = new Intent(this,Shops_Main.class);
         startActivity(intent);
-        finish();
+        finishAffinity();
     }
     @Override
     public void onResume() {

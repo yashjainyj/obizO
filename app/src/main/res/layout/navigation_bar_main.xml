@@ -14,6 +14,7 @@
           android:layout_width="match_parent"
           android:layout_height="?attr/actionBarSize"
           android:id="@+id/toolbar"
+          app:title="obizO"
           app:popupTheme="@style/AppTheme.NoActionBar"/>
   </com.google.android.material.appbar.AppBarLayout>
 

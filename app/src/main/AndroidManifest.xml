@@ -39,6 +39,7 @@
         <activity android:name=".UserAccount.Payment"></activity>
         <activity android:name=".Main.MyOrder"></activity>
         <activity android:name=".Main.MyOrder_Info"></activity>
+        <activity android:name=".UserAccount.Feedback"> </activity>
 
 
     </application>

@@ -1,9 +1,14 @@
 package com.example.obizo.Main;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,7 +19,10 @@ import com.smarteist.autoimageslider.SliderViewAdapter;
 public class SliderAdapterExample extends SliderViewAdapter<SliderAdapterExample.SliderAdapterVH> {
 
     private Context context;
-
+    Dialog dialog;
+    TextView titletv,message;
+    Button submit;
+    ImageView close;
     public  SliderAdapterExample(Context context) {
         this.context = context;
     }
@@ -56,6 +64,35 @@ public class SliderAdapterExample extends SliderViewAdapter<SliderAdapterExample
                 break;
 
         }
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog = new Dialog(context);
+                dialog.setContentView(R.layout.positive_popup_layput);
+                close  = dialog.findViewById(R.id.close);
+                titletv = dialog.findViewById(R.id.titletv);
+                message = dialog.findViewById(R.id.message);
+                submit = dialog.findViewById(R.id.btnaccept);
+                close.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+
+                submit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(context, ShowItemMain.class);
+                        context.startActivity(intent);
+
+                    }
+                });
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+
+            }
+        });
 
     }
 

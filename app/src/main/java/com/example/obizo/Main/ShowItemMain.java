@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -42,11 +43,13 @@ public class ShowItemMain extends AppCompatActivity {
     ShimmerFrameLayout shimmerFrameLayout;
     RelativeLayout relativeLayout;
     String cat;
+    TextView textView;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.shops_items);
         editText = findViewById(R.id.add_item);
+        textView = findViewById(R.id.itemavail);
         editText.setVisibility(View.GONE);
         shimmerFrameLayout = findViewById(R.id.shimmer);
         relativeLayout = findViewById(R.id.rel1);
@@ -91,13 +94,21 @@ public class ShowItemMain extends AppCompatActivity {
                     }
                    // Toast.makeText(ShowItemMain.this, item_data_model.getItemName(), Toast.LENGTH_SHORT).show();
                 }
-                RecyclerView.LayoutManager layoutManager = new GridLayoutManager(ShowItemMain.this,2);
-                Show_Item_Adapter show_item_adapter = new Show_Item_Adapter(ShowItemMain.this,arrayList);
-                recyclerView.setAdapter(show_item_adapter);
-                recyclerView.setLayoutManager(layoutManager);
+                if(arrayList.size()>0)
+                {
+                    RecyclerView.LayoutManager layoutManager = new GridLayoutManager(ShowItemMain.this,2);
+                    Show_Item_Adapter show_item_adapter = new Show_Item_Adapter(ShowItemMain.this,arrayList);
+                    recyclerView.setAdapter(show_item_adapter);
+                    recyclerView.setLayoutManager(layoutManager);
+                    relativeLayout.setVisibility(View.VISIBLE);
+                }
+                else
+                {
+                    textView.setVisibility(View.VISIBLE);
+                }
                 shimmerFrameLayout.stopShimmer();
                 shimmerFrameLayout.setVisibility(View.GONE);
-                relativeLayout.setVisibility(View.VISIBLE);
+
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -125,13 +136,21 @@ public class ShowItemMain extends AppCompatActivity {
                     }
                     //Toast.makeText(ShowItemMain.this, item_data_model.getItemName(), Toast.LENGTH_SHORT).show();
                 }
-                RecyclerView.LayoutManager layoutManager = new GridLayoutManager(ShowItemMain.this,2);
-                Show_Item_Adapter show_item_adapter = new Show_Item_Adapter(ShowItemMain.this,arrayList);
-                recyclerView.setAdapter(show_item_adapter);
-                recyclerView.setLayoutManager(layoutManager);
+              if(arrayList.size()>0)
+              {
+                  RecyclerView.LayoutManager layoutManager = new GridLayoutManager(ShowItemMain.this,2);
+                  Show_Item_Adapter show_item_adapter = new Show_Item_Adapter(ShowItemMain.this,arrayList);
+                  recyclerView.setAdapter(show_item_adapter);
+                  recyclerView.setLayoutManager(layoutManager);
+                  relativeLayout.setVisibility(View.VISIBLE);
+              }
+              else
+              {
+                    textView.setVisibility(View.VISIBLE);
+              }
                 shimmerFrameLayout.stopShimmer();
                 shimmerFrameLayout.setVisibility(View.GONE);
-                relativeLayout.setVisibility(View.VISIBLE);
+
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

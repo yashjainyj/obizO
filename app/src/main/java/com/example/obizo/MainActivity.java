@@ -3,9 +3,11 @@ package com.example.obizo;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -13,17 +15,36 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentTabHost;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.obizo.Login.LoginActivity;
 import com.example.obizo.Main.MyOrder;
 import com.example.obizo.NavigationView.Navigation_Home_Fragment;
+import com.example.obizo.NavigationView.Navigation_Timeline_Fragment;
+import com.example.obizo.NavigationView.Navigation_logout_Fragment;
+import com.example.obizo.NavigationView.Navigation_school_Fragment;
+import com.example.obizo.NavigationView.Navigation_settings_Fragment;
+import com.example.obizo.NavigationView.Navigation_work_Fragement;
 import com.example.obizo.UserAccount.Address_Detail;
 import com.example.obizo.UserAccount.Cart_Main;
+import com.example.obizo.UserAccount.Feedback;
+import com.example.obizo.seller.Item_data_model;
 import com.example.obizo.seller.Shops_Main;
+import com.example.obizo.seller.Show_Item;
+import com.example.obizo.seller.Show_Item_Adapter;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     DrawerLayout mDrawerLayout;
@@ -37,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
 
         Toolbar toolbar=findViewById(R.id.toolbar);
+
         mDrawerLayout=findViewById(R.id.drawerLayout);
         mDrawerToggle=new ActionBarDrawerToggle(this,mDrawerLayout,toolbar,R.string.open,R.string.close);
         mDrawerLayout.addDrawerListener(mDrawerToggle);
@@ -77,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         }
         else if(id==R.id.userLogin){
-            FirebaseAuth.getInstance().signOut();
+          FirebaseAuth.getInstance().signOut();
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(intent);
             finish();
@@ -99,10 +121,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             finish();
         }
         else if(id==R.id.nav_share){
-            Navigation_logout_Fragment fragment=new Navigation_logout_Fragment();
-            FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.framelayout,fragment,"Logout");
-            fragmentTransaction.commit();
+
+            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+            shareIntent.setType("text/plain");
+            shareIntent.putExtra(Intent.EXTRA_SUBJECT, "obizO");
+            String shareMessage= "\nLet me recommend you this application\n\n";
+            shareMessage = shareMessage + "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID +"\n\n";
+            shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
+            startActivity(Intent.createChooser(shareIntent, "choose one"));
+        }
+        else if(id==R.id.nav_send)
+        {
+            Intent intent = new Intent(MainActivity.this, Feedback.class);
+            startActivity(intent);
+            finish();
+
         }
         mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
