@@ -49,8 +49,6 @@ public class Shop_Main_Adapter extends RecyclerView.Adapter<Shop_Main_Adapter.Ad
                 Intent intent = new Intent(context,Show_Item.class);
                 intent.putExtra("shopId",shop_detais_modal.getShop_Id());
                 context.startActivity(intent);
-
-
             }
         });
     }

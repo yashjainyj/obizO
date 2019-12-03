@@ -1,43 +1,31 @@
-package com.example.obizo.NavigationView;
-
+package com.example.obizo.UserAccount;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RatingBar;
 
+import com.example.obizo.MainActivity;
 import com.example.obizo.R;
 import com.google.android.material.textfield.TextInputEditText;
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class Navigation_logout_Fragment extends Fragment {
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
-
-    public Navigation_logout_Fragment() {
-        // Required empty public constructor
-    }
-
+public class Feedback extends AppCompatActivity {
+    Button send,call;
+     RatingBar ratingBar;
+     TextInputEditText textInputEditText;
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.feedback, container, false);
-        Button send,call;
-        final RatingBar ratingBar;
-        final TextInputEditText textInputEditText;
-        send = view.findViewById(R.id.btnSubmit);
-        call = view.findViewById(R.id.calll);
-        textInputEditText = view.findViewById(R.id.feedback);
-        ratingBar = view.findViewById(R.id.ratingBar);
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.feedback);
+        send = findViewById(R.id.btnSubmit);
+        call = findViewById(R.id.calll);
+        textInputEditText = findViewById(R.id.feedback);
+        ratingBar = findViewById(R.id.ratingBar);
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,7 +48,13 @@ public class Navigation_logout_Fragment extends Fragment {
             }
         });
 
-        return view;
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(Feedback.this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
 }

@@ -3,6 +3,7 @@ package com.example.obizo.Login;
 import android.content.Intent;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -39,8 +40,8 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         FirebaseApp.initializeApp(LoginActivity.this);
-
-
+        email = findViewById(R.id.username);
+        password = findViewById(R.id.etPassword);
         SignIn=findViewById(R.id.signin);
         mAuth=FirebaseAuth.getInstance();
         signInwithOthers = findViewById(R.id.signinwithOthers);
@@ -111,12 +112,12 @@ public class LoginActivity extends AppCompatActivity {
                 FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
                 Toast.makeText(this, firebaseUser.getEmail(), Toast.LENGTH_SHORT).show();
             }
-            else
+            else if (requestCode==RESULT_CANCELED)
             {
-                Toast.makeText(LoginActivity.this, response.getError()+"", Toast.LENGTH_SHORT).show();
+               Toast.makeText(LoginActivity.this, response.getError()+"", Toast.LENGTH_SHORT).show();
             }
-
         }
+
     }
     @Override
     protected void onStart() {

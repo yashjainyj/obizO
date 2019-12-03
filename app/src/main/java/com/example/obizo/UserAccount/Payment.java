@@ -218,14 +218,13 @@ DatabaseReference databaseReference;
                                                 @Override
                                                 public void onClick(DialogInterface dialog, int which) {
                                                     Intent intent = new Intent(Payment.this, MainActivity.class);
-                                                    JavaMailAPI javaMailAPI = new JavaMailAPI(Payment.this, FirebaseAuth.getInstance().getCurrentUser().getEmail(),"Order Confirmation","Your order " + item_data_model.getItemName() + "is placed in 3-4 working days" + " Total Amount is " + amount.getText().toString()
+                                                    JavaMailAPI javaMailAPI = new JavaMailAPI(Payment.this, FirebaseAuth.getInstance().getCurrentUser().getEmail(),"Order Confirmation","Your order " + item_data_model.getItemName() + "is placed in evening" + " Total Amount is " + amount.getText().toString()
                                                             + "\n" + "Reference number"  + finalApprovalRefNo2);
                                                     javaMailAPI.execute();
                                                     JavaMailAPI javaMailAPI1 = new JavaMailAPI(Payment.this,shopemail,"Order Received"," order " + item_data_model.getItemName() + "is received" + " Total Amount paid " + amount.getText().toString()+ "\n" + "Reference number"  + finalApprovalRefNo2);
                                                     javaMailAPI1.execute();
                                                     JavaMailAPI javaMailAPI3 = new JavaMailAPI(Payment.this,"Sagar.singh9759@gmail.com","Order Received"," order id " + item_data_model.getItemId() + "\n Name :"+ item_data_model.getItemName() +  "  is received" + " Total Amount paid " + amount.getText().toString()+ "\n" + "Reference number"  + finalApprovalRefNo2);
                                                     javaMailAPI3.execute();
-
                                                     startActivity(intent);
                                                     finishAffinity();
                                                     finish();

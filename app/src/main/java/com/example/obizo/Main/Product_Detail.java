@@ -80,7 +80,7 @@ public class Product_Detail extends AppCompatActivity {
     }
 
 
-    public  void   addCart(View v)
+    public  void    addCart(View v)
     {
         databaseReference = FirebaseDatabase.getInstance().getReference();
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();

@@ -30,6 +30,7 @@ import com.example.obizo.NavigationView.Navigation_settings_Fragment;
 import com.example.obizo.NavigationView.Navigation_work_Fragement;
 import com.example.obizo.UserAccount.Address_Detail;
 import com.example.obizo.UserAccount.Cart_Main;
+import com.example.obizo.UserAccount.Feedback;
 import com.example.obizo.seller.Item_data_model;
 import com.example.obizo.seller.Shops_Main;
 import com.example.obizo.seller.Show_Item;
@@ -57,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
 
         Toolbar toolbar=findViewById(R.id.toolbar);
+
         mDrawerLayout=findViewById(R.id.drawerLayout);
         mDrawerToggle=new ActionBarDrawerToggle(this,mDrawerLayout,toolbar,R.string.open,R.string.close);
         mDrawerLayout.addDrawerListener(mDrawerToggle);
@@ -97,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         }
         else if(id==R.id.userLogin){
-            FirebaseAuth.getInstance().signOut();
+          FirebaseAuth.getInstance().signOut();
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(intent);
             finish();
@@ -119,10 +121,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             finish();
         }
         else if(id==R.id.nav_share){
-            Navigation_logout_Fragment fragment=new Navigation_logout_Fragment();
-            FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.framelayout,fragment,"Logout");
-            fragmentTransaction.commit();
+
+            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+            shareIntent.setType("text/plain");
+            shareIntent.putExtra(Intent.EXTRA_SUBJECT, "obizO");
+            String shareMessage= "\nLet me recommend you this application\n\n";
+            shareMessage = shareMessage + "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID +"\n\n";
+            shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
+            startActivity(Intent.createChooser(shareIntent, "choose one"));
+        }
+        else if(id==R.id.nav_send)
+        {
+            Intent intent = new Intent(MainActivity.this, Feedback.class);
+            startActivity(intent);
+            finish();
+
         }
         mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
