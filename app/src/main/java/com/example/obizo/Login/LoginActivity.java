@@ -39,8 +39,8 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         FirebaseApp.initializeApp(LoginActivity.this);
-
-
+        email=findViewById(R.id.email1);
+        password=findViewById(R.id.username);
         SignIn=findViewById(R.id.signin);
         mAuth=FirebaseAuth.getInstance();
         signInwithOthers = findViewById(R.id.signinwithOthers);
@@ -49,7 +49,6 @@ public class LoginActivity extends AppCompatActivity {
                 new AuthUI.IdpConfig.EmailBuilder().build(),
                 new AuthUI.IdpConfig.PhoneBuilder().build(),
                 new AuthUI.IdpConfig.GoogleBuilder().build()
-
         );
 //        SignUp.setOnClickListener(new View.OnClickListener() {
 //            @Override

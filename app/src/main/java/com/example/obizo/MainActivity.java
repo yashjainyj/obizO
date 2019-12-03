@@ -3,11 +3,9 @@ package com.example.obizo;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -15,35 +13,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.FragmentTabHost;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.obizo.Login.LoginActivity;
 import com.example.obizo.Main.MyOrder;
 import com.example.obizo.NavigationView.Navigation_Home_Fragment;
-import com.example.obizo.NavigationView.Navigation_Timeline_Fragment;
-import com.example.obizo.NavigationView.Navigation_logout_Fragment;
-import com.example.obizo.NavigationView.Navigation_school_Fragment;
-import com.example.obizo.NavigationView.Navigation_settings_Fragment;
-import com.example.obizo.NavigationView.Navigation_work_Fragement;
 import com.example.obizo.UserAccount.Address_Detail;
 import com.example.obizo.UserAccount.Cart_Main;
-import com.example.obizo.seller.Item_data_model;
 import com.example.obizo.seller.Shops_Main;
-import com.example.obizo.seller.Show_Item;
-import com.example.obizo.seller.Show_Item_Adapter;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     DrawerLayout mDrawerLayout;
