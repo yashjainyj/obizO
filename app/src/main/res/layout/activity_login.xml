@@ -77,12 +77,14 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/etPasswordLayout"
         android:layout_marginHorizontal="20dp"
         android:text="Sign In"
-        android:background="#00C6C4CA"
+        android:background="@drawable/button_green_dark"
+        android:padding="10dp"
+        android:layout_centerHorizontal="true"
         android:id="@+id/signin"
         android:layout_marginBottom="20dp"
         >
@@ -113,13 +115,16 @@
 
 
 <Button
-    android:layout_width="match_parent"
+    android:layout_width="250dp"
     android:layout_height="wrap_content"
     android:layout_below="@+id/question"
     android:layout_marginHorizontal="20dp"
     android:text="Sign In With Others"
-    android:background="#00C6C4CA"
+    android:layout_centerHorizontal="true"
+    android:background="@drawable/button_sing"
     android:id="@+id/signinwithOthers"
+    android:padding="20dp"
+    android:layout_marginTop="20dp"
     android:layout_marginBottom="20dp"
 
     />

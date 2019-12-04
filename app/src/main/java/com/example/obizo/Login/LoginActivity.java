@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,8 +17,10 @@ import com.example.obizo.MainActivity;
 import com.example.obizo.R;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
@@ -28,7 +31,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
-    TextView SignUp;
+    TextView forgetpass;
     TextInputEditText email,password;
     Button SignIn,signInwithOthers;
     FirebaseAuth mAuth;
@@ -41,6 +44,8 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         FirebaseApp.initializeApp(LoginActivity.this);
         email = findViewById(R.id.username);
+        forgetpass = findViewById(R.id.forgetpass);
+
         password = findViewById(R.id.etPassword);
         SignIn=findViewById(R.id.signin);
         mAuth=FirebaseAuth.getInstance();
@@ -60,6 +65,22 @@ public class LoginActivity extends AppCompatActivity {
 //                finish();
 //            }
 //        });
+
+        forgetpass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mAuth.sendPasswordResetEmail(email.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful())
+                        {
+                            Toast.makeText(LoginActivity.this, "Reset Mail has been send to your email address", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+            }
+        });
         SignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
