@@ -22,12 +22,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.obizo.Login.LoginActivity;
 import com.example.obizo.Main.MyOrder;
-import com.example.obizo.NavigationView.Navigation_Home_Fragment;
-import com.example.obizo.NavigationView.Navigation_Timeline_Fragment;
+import com.example.obizo.NavigationView.Navigation_Home_Fragment;;
 import com.example.obizo.NavigationView.Navigation_logout_Fragment;
-import com.example.obizo.NavigationView.Navigation_school_Fragment;
-import com.example.obizo.NavigationView.Navigation_settings_Fragment;
-import com.example.obizo.NavigationView.Navigation_work_Fragement;
+
 import com.example.obizo.UserAccount.Address_Detail;
 import com.example.obizo.UserAccount.Cart_Main;
 import com.example.obizo.UserAccount.Feedback;

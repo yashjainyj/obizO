@@ -69,15 +69,23 @@ public class LoginActivity extends AppCompatActivity {
         forgetpass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mAuth.sendPasswordResetEmail(email.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful())
-                        {
-                            Toast.makeText(LoginActivity.this, "Reset Mail has been send to your email address", Toast.LENGTH_SHORT).show();
+                if(email.getText().toString().equalsIgnoreCase(""))
+                {
+                    Toast.makeText(LoginActivity.this, "Please enter email address", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    mAuth.sendPasswordResetEmail(email.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if(task.isSuccessful())
+                            {
+                                Toast.makeText(LoginActivity.this, "Reset Mail has been send to your email address", Toast.LENGTH_SHORT).show();
+                            }
                         }
-                    }
-                });
+                    });
+                }
+
 
             }
         });

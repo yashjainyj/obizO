@@ -13,7 +13,7 @@
         android:layout_height="200dp"
         android:layout_gravity="center"
         android:layout_marginTop="200dp"
-        android:src="@drawable/logo"></ImageView>
+        android:src="@drawable/image"></ImageView>
 
 
 </LinearLayout>
