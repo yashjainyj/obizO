@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.obizo.Main.RecyclerViewAdapter;
+import com.example.obizo.Main.Show_Item_Main_Adapter;
 import com.example.obizo.Main.SliderAdapterExample;
 import com.example.obizo.MainActivity;
 import com.example.obizo.R;
@@ -100,17 +101,20 @@ public class Navigation_Home_Fragment extends Fragment {
     }
     private void getImages(){
 
-        mImageUrls.add("https://martjackstorage.blob.core.windows.net/in-resources/db45a459-67f3-4061-9bf2-b70783e2d522/Wedding%20lehenga.jpg");
+        mImageUrls.add("https://previews.123rf.com/images/oilchai/oilchai1703/oilchai170300018/75609627-closeup-lantern-handmade-from-coconut-shell-for-decorative-in-a-thai-local-.jpg");
         mNames.add("Trending");
 
-        mImageUrls.add("https://i.pinimg.com/originals/48/bd/92/48bd92db0155df8ab67ee273919056e3.jpg");
+        mImageUrls.add("https://image.shutterstock.com/image-photo/bundi-rajasthan-india-nov-9-260nw-1465229852.jpg");
         mNames.add("Mens");
 
-        mImageUrls.add("https://stylesatlife.com/wp-content/uploads/2018/03/Zardosi-set-with-belt.jpg");
+        mImageUrls.add("https://i.pinimg.com/originals/20/40/06/204006378dab7ab9b25fea08c72b9393.jpg");
         mNames.add("Womens");
 
-        mImageUrls.add("https://g3fashion.com/blog/wp-content/uploads/2014/07/Indiakidsfashionweek2-1.jpg");
+        mImageUrls.add("https://us.123rf.com/450wm/adsniks/adsniks1908/adsniks190801028/128566632-cute-indian-child-in-traditional-wear.jpg?ver=6");
         mNames.add("Kids");
+
+        mImageUrls.add("https://c8.alamy.com/comp/2A1M571/collection-of-handmade-ceramic-pottery-local-craft-products-decorative-ceramic-handmade-decorations-for-the-interior-natural-handmade-clay-pots-ce-2A1M571.jpg");
+        mNames.add("Others");
 
 
 //
@@ -154,7 +158,7 @@ public class Navigation_Home_Fragment extends Fragment {
                         arrayList.add(item_data_model);
                     }
                 }
-               Show_Item_Adapter myAdapter = new Show_Item_Adapter(getActivity(),arrayList);
+               Show_Item_Main_Adapter myAdapter = new Show_Item_Main_Adapter(getActivity(),arrayList);
                 recyclerView1.setLayoutManager(new GridLayoutManager(getContext(),2));
                 recyclerView1.setAdapter(myAdapter);
                 shimmerFrameLayout.stopShimmer();

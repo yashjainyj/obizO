@@ -60,7 +60,15 @@ public class Product_Detail extends AppCompatActivity {
         shimmerFrameLayout = findViewById(R.id.shimmer);
         relativeLayout = findViewById(R.id.rel1);
         item_id = intent.getStringExtra("item_id");
+        String ss = intent.getStringExtra("ss");
         init();
+        if(ss!=null)
+        {
+          //  Toast.makeText(this, ss, Toast.LENGTH_SHORT).show();
+            addToCart.setVisibility(View.GONE);
+            buyNow.setVisibility(View.GONE);
+        }
+
         addToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

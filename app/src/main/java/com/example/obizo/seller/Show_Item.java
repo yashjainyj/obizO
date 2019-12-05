@@ -54,7 +54,7 @@ TextView textView;
         shimmerFrameLayout = findViewById(R.id.shimmer);
         relativeLayout = findViewById(R.id.rel1);
         shopId= intent.getStringExtra("shopId");
-        Toast.makeText(this, shopId, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, shopId, Toast.LENGTH_SHORT).show();
         add = findViewById(R.id.add_item);
         recyclerView = findViewById(R.id.recyclerview);
         add.setOnClickListener(new View.OnClickListener() {
@@ -98,6 +98,8 @@ TextView textView;
                 else
                 {
                     textView.setVisibility(View.VISIBLE);
+                    relativeLayout.setVisibility(View.VISIBLE);
+                    add.setVisibility(View.VISIBLE);
                 }
                 shimmerFrameLayout.stopShimmer();
                 shimmerFrameLayout.setVisibility(View.GONE);

@@ -1,4 +1,4 @@
-package com.example.obizo.seller;
+package com.example.obizo.Main;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.obizo.Main.Product_Detail;
 import com.example.obizo.R;
+import com.example.obizo.seller.Item_data_model;
 
 import java.util.List;
 
@@ -18,11 +19,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class Show_Item_Adapter extends RecyclerView.Adapter<Show_Item_Adapter.Adapter_ViewHolder> {
+public class Show_Item_Main_Adapter extends RecyclerView.Adapter<Show_Item_Main_Adapter.Adapter_ViewHolder> {
 
     private Context context;
 
-    public Show_Item_Adapter(Context context, List<Item_data_model> list) {
+    public Show_Item_Main_Adapter(Context context, List<Item_data_model> list) {
         this.context = context;
         this.list = list;
     }
@@ -46,9 +47,7 @@ public class Show_Item_Adapter extends RecyclerView.Adapter<Show_Item_Adapter.Ad
             public void onClick(View v) {
                 Intent intent = new Intent(context, Product_Detail.class);
                 intent.putExtra("item_id",item_data_model.getItemId());
-                intent.putExtra("ss","qw");
                 context.startActivity(intent);
-
             }
         });
     }

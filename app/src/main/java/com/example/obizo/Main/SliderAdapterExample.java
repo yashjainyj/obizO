@@ -41,7 +41,7 @@ public class SliderAdapterExample extends SliderViewAdapter<SliderAdapterExample
             case 0:
                 viewHolder.textViewDescription.setText("Mens Wear");
                 Glide.with(viewHolder.itemView)
-                        .load("https://planetfashion.imgix.net/img/app/shopmedia/production/1/10-57-2563.jpg?w=992&auto=format")
+                        .load("https://i.pinimg.com/originals/50/6a/1a/506a1a570f3e42e5e63858f393efbd87.jpg")
                         .into(viewHolder.imageViewBackground);
                 break;
             case 1:
@@ -53,13 +53,13 @@ public class SliderAdapterExample extends SliderViewAdapter<SliderAdapterExample
             case 2:
                 viewHolder.textViewDescription.setText("Kids Wear");
                 Glide.with(viewHolder.itemView)
-                        .load("https://www.fbbonline.in/media/mcms/kidsethnic-01_15700913391029.jpg")
+                        .load("https://www.bunosilo.com/media/catalog/product/cache/1/image/1200x/040ec09b1e35df139433887a97daa66f/t/t/tt19.41.028.1_a.jpg")
                         .into(viewHolder.imageViewBackground);
                 break;
             default:
-                viewHolder.textViewDescription.setText("Wedding Season");
+                viewHolder.textViewDescription.setText("Home Decoratives");
                 Glide.with(viewHolder.itemView)
-                        .load("http://culturextourism.com/wp-content/uploads/2015/12/South-Indian-Dresses.jpg")
+                        .load("https://5.imimg.com/data5/RR/EC/MU/SELLER-3297603/terracotta-ganesha-homedecor-best-options-for-gift-items-500x500.jpg")
                         .into(viewHolder.imageViewBackground);
                 break;
 

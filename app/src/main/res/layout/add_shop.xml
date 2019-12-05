@@ -84,7 +84,7 @@
                 android:id="@+id/shop_min1"
                 android:layout_below="@+id/shop_address1"
                 android:layout_marginRight="20dp"
-                android:hint="Min Delivery Time in minutes">
+                android:hint="Min Delivery Time in Days">
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:id="@+id/min"

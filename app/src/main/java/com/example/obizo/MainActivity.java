@@ -72,9 +72,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             View view = getLayoutInflater().inflate(R.layout.navigation_header,null);
             TextView name = view.findViewById(R.id.name);
             TextView number = view.findViewById(R.id.email);
-            number.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
-            String s[] = FirebaseAuth.getInstance().getCurrentUser().getEmail().split("@");
-            name.setText(s[0]);
+            if(FirebaseAuth.getInstance().getCurrentUser().getEmail()==null)
+            {
+                name.setText("Welcome");
+                number.setText(FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber());
+            }
+            else
+            {
+                number.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+                String s[] = FirebaseAuth.getInstance().getCurrentUser().getEmail().split("@");
+                name.setText(s[0]);
+            }
             navigationView.addHeaderView(view);
             navigationView.setNavigationItemSelectedListener(this);
         }

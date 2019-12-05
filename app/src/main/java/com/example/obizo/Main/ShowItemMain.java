@@ -97,7 +97,7 @@ public class ShowItemMain extends AppCompatActivity {
                 if(arrayList.size()>0)
                 {
                     RecyclerView.LayoutManager layoutManager = new GridLayoutManager(ShowItemMain.this,2);
-                    Show_Item_Adapter show_item_adapter = new Show_Item_Adapter(ShowItemMain.this,arrayList);
+                    Show_Item_Main_Adapter show_item_adapter = new Show_Item_Main_Adapter(ShowItemMain.this,arrayList);
                     recyclerView.setAdapter(show_item_adapter);
                     recyclerView.setLayoutManager(layoutManager);
                     relativeLayout.setVisibility(View.VISIBLE);
@@ -139,7 +139,7 @@ public class ShowItemMain extends AppCompatActivity {
               if(arrayList.size()>0)
               {
                   RecyclerView.LayoutManager layoutManager = new GridLayoutManager(ShowItemMain.this,2);
-                  Show_Item_Adapter show_item_adapter = new Show_Item_Adapter(ShowItemMain.this,arrayList);
+                  Show_Item_Main_Adapter show_item_adapter = new Show_Item_Main_Adapter(ShowItemMain.this,arrayList);
                   recyclerView.setAdapter(show_item_adapter);
                   recyclerView.setLayoutManager(layoutManager);
                   relativeLayout.setVisibility(View.VISIBLE);
